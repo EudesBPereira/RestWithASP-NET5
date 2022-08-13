@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using RestWithASPNET.Services;
+using RestWithASPNET.Services.Implementations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,10 +30,13 @@ namespace RestWithASPNET
         {
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "RestWithASPNET", Version = "v1" });
-            });
+
+            //Dependency Injection
+            services.AddScoped<IPersonService, PersonServiceImplementation>();
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "RestWithASPNET", Version = "v1" });
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
